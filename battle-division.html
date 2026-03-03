@@ -1,75 +1,128 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>PPCU – Battle Division</title>
-      <link rel="stylesheet" href="styles.css" />
-      <script defer src="script.js"></script>
-    </head>
-    <body class="div-battle">
-      <div class="topbar">
-        <div class="brand">
-          <div class="brand-mark" aria-hidden="true"></div>
-          <div>
-            <h1>PPCU</h1>
-            <div class="tag">Pilates Pals Cinematic Universe</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PPCU – Battle Division</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+
+<body class="div-battle">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <h1>PPCU</h1>
+          <div class="tag">Pilates Pals Cinematic Universe</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="battle-division.html">Battle Division</a>
+        <a href="emberforge.html">Emberforge</a>
+        <a href="cabinet.html">The Cabinet</a>
+        <a href="hall-of-champions.html">Hall of Champions</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" aria-label="Battle Division overview">
+      <div class="hero-top">
+        <div>
+          <h2>Battle Division</h2>
+          <p>
+            Competitive miniatures league: 40k, Legion, MESBG, Armada, Shatterpoint.
+            Dossier-style player cards + season standings.
+          </p>
+        </div>
+
+        <div class="hero-meta">
+          <span class="badge"><span class="dot"></span>Season Standings</span>
+          <span class="badge"><span class="dot"></span>Winter Offensive</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Battle Division dashboard">
+      <article class="card span-8">
+        <h3>Season Standings</h3>
+
+        <!-- JS populates the header/rows -->
+        <table class="table" id="battleStandings">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+
+        <div class="small" style="margin-top:10px;">
+          Prototype standings. Add players and results in <code>script.js</code>.
+        </div>
+      </article>
+
+      <aside class="card span-4">
+        <h3>Holiday Special</h3>
+        <div class="badge"><span class="dot"></span>Winter Offensive</div>
+
+        <div class="small" style="margin-top:10px;">
+          End-of-year narrative mega-battle (or team event). Optional double-points night.
+          Treat it like a season finale: rivalry callbacks, awards, and one “headline” match.
+        </div>
+
+        <hr class="sep" />
+
+        <div class="note">
+          Rule of thumb: keep standings clean, but let the story live in player dossiers and the Hall of Champions.
+        </div>
+      </aside>
+
+      <article class="card">
+        <h3>Player Cards</h3>
+        <div class="small">
+          Dossier-style cards per player with season stats + career snapshot.
+          (Portrait slot reserved on every card.)
+        </div>
+
+        <hr class="sep" />
+
+        <div class="grid" style="margin-top:0;">
+          <div class="card span-6" style="margin-top:0;">
+            <h3 style="margin-bottom:8px;">Roster</h3>
+            <ul class="clean-list">
+              <li><a href="players/nick-battle.html">Nick</a></li>
+              <li><a href="players/josh-burchfield-battle.html">Josh Burchfield</a></li>
+              <li><a href="players/josh-brown-battle.html">Josh Brown</a></li>
+              <li><a href="players/katelyn-brown-battle.html">Katelyn Brown</a></li>
+              <li><a href="players/spencer-hinrichs-battle.html">Spencer Hinrichs</a></li>
+              <li><a href="players/carson-hinrichs-battle.html">Carson Hinrichs</a></li>
+              <li><a href="players/corey-jackson-battle.html">Corey Jackson</a></li>
+            </ul>
+          </div>
+
+          <div class="card span-6" style="margin-top:0;">
+            <h3 style="margin-bottom:8px;">What’s tracked</h3>
+            <div class="small">
+              <ul class="clean-list">
+                <li>Season points, W/L, and MVP votes</li>
+                <li>Signature faction / army identity</li>
+                <li>Career wins & legacy moments</li>
+                <li>Rivalries (kept fun, not toxic)</li>
+              </ul>
+            </div>
+
+            <div class="note" style="margin-top:12px;">
+              When you paste the player pages, I’ll also fix their nav so it works correctly from <code>/players/</code>.
+            </div>
           </div>
         </div>
-        <div class="nav">
-          <a href="index.html">Home</a>
-          <a href="battle-division.html">Battle Division</a>
-          <a href="emberforge.html">Emberforge</a>
-          <a href="cabinet.html">The Cabinet</a>
-          <a href="hall-of-champions.html">Hall of Champions</a>
-        </div>
-      </div>
+      </article>
+    </section>
 
-      <div class="container">
-        <section class="hero">
-          <h2>Battle Division</h2>
-          <p>Competitive miniatures league: 40k, Legion, MESBG, Armada, Shatterpoint. Dossier-style player cards + season standings.</p>
-        </section>
-
-        <div class="grid">
-  <div class="card span-8">
-    <h3>Season Standings</h3>
-    <table class="table" id="battleStandings">
-      <thead></thead>
-      <tbody></tbody>
-    </table>
-    <div class="small">Prototype standings. Add players and results in <code>script.js</code>.</div>
-  </div>
-
-  <div class="card span-4">
-    <h3>Holiday Special</h3>
-    <div class="badge"><span class="dot"></span>Winter Offensive</div>
-    <p class="small" style="margin-top:10px;">
-      End-of-year narrative mega-battle (or team event). Optional double-points night.
-    </p>
-  </div>
-
-  <div class="card">
-    <h3>Player Cards</h3>
-    <p class="small">
-      Coming next: dossier-style cards per player with season stats + career snapshot.
-      (Portrait slot reserved on every card.)
-    </p>
-        <div class="small"><ul>
-<li><a href="players/nick-battle.html">Nick</a></li>
-<li><a href="players/josh-burchfield-battle.html">Josh Burchfield</a></li>
-<li><a href="players/josh-brown-battle.html">Josh Brown</a></li>
-<li><a href="players/katelyn-brown-battle.html">Katelyn Brown</a></li>
-<li><a href="players/spencer-hinrichs-battle.html">Spencer Hinrichs</a></li>
-<li><a href="players/carson-hinrichs-battle.html">Carson Hinrichs</a></li>
-<li><a href="players/corey-jackson-battle.html">Corey Jackson</a></li>
-</ul></div>
-  </div>
-</div>
-
-        <div class="footer">
-          Built as a lightweight prototype for PPCU. Update stats in <code>script.js</code> for now.
-        </div>
-      </div>
-    </body>
-    </html>
+    <footer class="footer">
+      Built as a lightweight prototype for PPCU. Update stats in <code>script.js</code> for now.
+    </footer>
+  </main>
+</body>
+</html>
