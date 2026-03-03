@@ -36,12 +36,12 @@
           <h2>Emberforge</h2>
           <p>
             TTRPG division. Champion is voted (players now; community later).
-            Track narrative impact, spotlight episodes, and legacy moments.
+            Track arcs, recaps, spotlight scenes, and the moments that become canon.
           </p>
         </div>
 
         <div class="hero-meta">
-          <span class="badge"><span class="dot"></span>Season Tracker</span>
+          <span class="badge"><span class="dot"></span>Campaign Hub</span>
           <span class="badge"><span class="dot"></span>Emberforge Chronicle</span>
         </div>
       </div>
@@ -49,20 +49,37 @@
 
     <section class="grid" aria-label="Emberforge dashboard">
       <article class="card span-8">
-        <h3>Season Tracker</h3>
+        <h3>Current Arc</h3>
 
         <div class="small">
-          This isn’t just “wins and losses.” It’s impact, spotlight, and how the table remembers you.
-          (This table auto-populates from <code>script.js</code> for now.)
+          Emberforge isn’t a leaderboard — it’s a living story. This dashboard tracks the campaign heartbeat.
         </div>
 
-        <table class="table" id="emberStandings">
-          <thead></thead>
-          <tbody></tbody>
-        </table>
+        <div class="kpi-row" style="margin-top:12px;">
+          <div class="kpi">
+            <div class="label">Arc</div>
+            <div class="value" id="efArc">Arc 1: TBD</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Last Session</div>
+            <div class="value" id="efLast">TBD</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Spotlight</div>
+            <div class="value" id="efSpotlight">TBD</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Session MVP</div>
+            <div class="value" id="efMvp">TBD</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Next Session</div>
+            <div class="value" id="efNext">TBD</div>
+          </div>
+        </div>
 
         <div class="note" style="margin-top:12px;">
-          Future upgrade: add an Episode Index page and a simple vote form so “Champion” is actually voted each arc.
+          Future upgrade: an Episode Index page + quick vote form so MVP/Spotlight can be selected after each session.
         </div>
       </article>
 
@@ -122,7 +139,7 @@
             </div>
 
             <div class="note" style="margin-top:12px;">
-              When you paste a player page, I’ll convert it into a real “character dossier” layout and make sure the nav works inside <code>/players/</code>.
+              Next step: paste one Emberforge character page and we’ll convert it into a proper dossier (portrait slot + character bio + arc highlights).
             </div>
           </div>
         </div>
@@ -130,10 +147,8 @@
     </section>
 
     <footer class="footer">
-      Built as a lightweight prototype for PPCU. Update stats in <code>script.js</code> for now.
+      Built as a lightweight prototype for PPCU. Campaign tracker values live in <code>script.js</code> for now.
     </footer>
   </main>
 </body>
 </html>
-
-
