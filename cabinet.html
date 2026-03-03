@@ -1,76 +1,137 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>PPCU – The Cabinet</title>
-      <link rel="stylesheet" href="styles.css" />
-      <script defer src="script.js"></script>
-    </head>
-    <body class="div-cabinet">
-      <div class="topbar">
-        <div class="brand">
-          <div class="brand-mark" aria-hidden="true"></div>
-          <div>
-            <h1>PPCU</h1>
-            <div class="tag">Pilates Pals Cinematic Universe</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PPCU – The Cabinet</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+
+<body class="div-cabinet">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <h1>PPCU</h1>
+          <div class="tag">Pilates Pals Cinematic Universe</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="battle-division.html">Battle Division</a>
+        <a href="emberforge.html">Emberforge</a>
+        <a href="cabinet.html">The Cabinet</a>
+        <a href="hall-of-champions.html">Hall of Champions</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" aria-label="Cabinet overview">
+      <div class="hero-top">
+        <div>
+          <h2>The Cabinet</h2>
+          <p>
+            Board game division. Mix of hard stats and table politics — parliamentary scorecard aesthetic.
+            Win percentage matters… but so does who you convinced to vote with you.
+          </p>
+        </div>
+
+        <div class="hero-meta">
+          <span class="badge"><span class="dot"></span>Season Leaderboard</span>
+          <span class="badge"><span class="dot"></span>Cabinet Summit</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Cabinet dashboard">
+      <article class="card span-8">
+        <h3>Season Leaderboard</h3>
+
+        <!-- JS populates header/rows -->
+        <table class="table" id="cabinetStandings">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+
+        <div class="small" style="margin-top:10px;">
+          Prototype leaderboard. Update stats in <code>script.js</code>.
+        </div>
+
+        <div class="note" style="margin-top:12px;">
+          Cabinet scoring philosophy: reward consistency, punish no-shows, and track “influence” as the story stat.
+        </div>
+      </article>
+
+      <aside class="card span-4">
+        <h3>Holiday Special</h3>
+        <div class="badge"><span class="dot"></span>Cabinet Summit</div>
+
+        <div class="small" style="margin-top:10px;">
+          High-stakes game night with rotating games and bonus points. Perfect for tradition-building.
+          Treat it like election night: speeches, superlatives, and one final “swing state” table.
+        </div>
+
+        <hr class="sep" />
+
+        <div class="small">
+          Suggested Summit format:
+          <ul class="clean-list">
+            <li>3 games (short → medium → “main event”)</li>
+            <li>Bonus points for podium finishes</li>
+            <li>One “coalition vote” award (table voted)</li>
+          </ul>
+        </div>
+      </aside>
+
+      <article class="card">
+        <h3>Political Profiles</h3>
+        <div class="small">
+          Dossier cards for each member: seat, reputation, alliances, betrayals, season stats, and career lore.
+          Sample profile: <a href="players/nick-cabinet.html">Nick – Cabinet Profile</a>
+        </div>
+
+        <hr class="sep" />
+
+        <div class="grid" style="margin-top:0;">
+          <div class="card span-6" style="margin-top:0;">
+            <h3 style="margin-bottom:8px;">Members</h3>
+            <ul class="clean-list">
+              <li><a href="players/nick-cabinet.html">Nick</a></li>
+              <li><a href="players/josh-burchfield-cabinet.html">Josh Burchfield</a></li>
+              <li><a href="players/josh-brown-cabinet.html">Josh Brown</a></li>
+              <li><a href="players/katelyn-brown-cabinet.html">Katelyn Brown</a></li>
+              <li><a href="players/spencer-hinrichs-cabinet.html">Spencer Hinrichs</a></li>
+              <li><a href="players/carson-hinrichs-cabinet.html">Carson Hinrichs</a></li>
+              <li><a href="players/corey-jackson-cabinet.html">Corey Jackson</a></li>
+            </ul>
+          </div>
+
+          <div class="card span-6" style="margin-top:0;">
+            <h3 style="margin-bottom:8px;">What’s tracked</h3>
+            <div class="small">
+              <ul class="clean-list">
+                <li>Win %, games played, and “Influence” score</li>
+                <li>Seat number, alignment, and reputation tag</li>
+                <li>Streaks, endgame conversion, and avg finish</li>
+                <li>Alliance reliability + betrayal incidents</li>
+              </ul>
+            </div>
+
+            <div class="note" style="margin-top:12px;">
+              When you paste the player pages, I’ll make sure their nav works from <code>/players/</code> and the layout matches this.
+            </div>
           </div>
         </div>
-        <div class="nav">
-          <a href="index.html">Home</a>
-          <a href="battle-division.html">Battle Division</a>
-          <a href="emberforge.html">Emberforge</a>
-          <a href="cabinet.html">The Cabinet</a>
-          <a href="hall-of-champions.html">Hall of Champions</a>
-        </div>
-      </div>
+      </article>
+    </section>
 
-      <div class="container">
-        <section class="hero">
-          <h2>The Cabinet</h2>
-          <p>Board game division. Mix of hard stats and table politics — parliamentary scorecard aesthetic.</p>
-        </section>
-
-        <div class="grid">
-  <div class="card span-8">
-    <h3>Season Leaderboard</h3>
-    <table class="table" id="cabinetStandings">
-      <thead></thead>
-      <tbody></tbody>
-    </table>
-    <div class="small">
-      Prototype leaderboard. Update stats in <code>script.js</code>.
-    </div>
-  </div>
-
-  <div class="card span-4">
-    <h3>Holiday Special</h3>
-    <div class="badge"><span class="dot"></span>Cabinet Summit</div>
-    <p class="small" style="margin-top:10px;">
-      High-stakes game night with rotating games and bonus points. Perfect for tradition-building.
-    </p>
-  </div>
-
-  <div class="card">
-    <h3>Political Profiles</h3>
-    <p class="small">
-      Sample profile: <a href="players/nick-cabinet.html">Nick – Cabinet Profile</a>
-    </p>
-        <div class="small"><ul>
-<li><a href="players/nick-cabinet.html">Nick</a></li>
-<li><a href="players/josh-burchfield-cabinet.html">Josh Burchfield</a></li>
-<li><a href="players/josh-brown-cabinet.html">Josh Brown</a></li>
-<li><a href="players/katelyn-brown-cabinet.html">Katelyn Brown</a></li>
-<li><a href="players/spencer-hinrichs-cabinet.html">Spencer Hinrichs</a></li>
-<li><a href="players/carson-hinrichs-cabinet.html">Carson Hinrichs</a></li>
-<li><a href="players/corey-jackson-cabinet.html">Corey Jackson</a></li>
-</ul></div>
-  </div>
-</div>
-
-        <div class="footer">
-          Built as a lightweight prototype for PPCU. Update stats in <code>script.js</code> for now.
-        </div>
-      </div>
-    </body>
-    </html>
+    <footer class="footer">
+      Built as a lightweight prototype for PPCU. Update stats in <code>script.js</code> for now.
+    </footer>
+  </main>
+</body>
+</html>
