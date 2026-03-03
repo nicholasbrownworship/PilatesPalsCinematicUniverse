@@ -1,74 +1,129 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>PPCU – Hall of Champions</title>
-      <link rel="stylesheet" href="styles.css" />
-      <script defer src="script.js"></script>
-    </head>
-    <body class="div-hall">
-      <div class="topbar">
-        <div class="brand">
-          <div class="brand-mark" aria-hidden="true"></div>
-          <div>
-            <h1>PPCU</h1>
-            <div class="tag">Pilates Pals Cinematic Universe</div>
-          </div>
-        </div>
-        <div class="nav">
-          <a href="index.html">Home</a>
-          <a href="battle-division.html">Battle Division</a>
-          <a href="emberforge.html">Emberforge</a>
-          <a href="cabinet.html">The Cabinet</a>
-          <a href="hall-of-champions.html">Hall of Champions</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PPCU – Hall of Champions</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+
+<body class="div-hall">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <h1>PPCU</h1>
+          <div class="tag">Pilates Pals Cinematic Universe</div>
         </div>
       </div>
 
-      <div class="container">
-        <section class="hero">
-          <h2>Hall of Champions</h2>
-          <p>A long-term legacy page commemorating yearly division champions. (Start it now — it gets better every year.)</p>
-        </section>
-
-        <div class="grid">
-  <div class="card">
-    <h3>2026</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Division</th>
-          <th>Champion</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Battle Division</td>
-          <td>TBD</td>
-          <td>Season 1 begins.</td>
-        </tr>
-        <tr>
-          <td>Emberforge</td>
-          <td>TBD</td>
-          <td>Champion chosen by vote.</td>
-        </tr>
-        <tr>
-          <td>The Cabinet</td>
-          <td>TBD</td>
-          <td>Political legends are made.</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="note">
-      You can add short “legacy blurbs” here later — one or two sentences per champion.
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="battle-division.html">Battle Division</a>
+        <a href="emberforge.html">Emberforge</a>
+        <a href="cabinet.html">The Cabinet</a>
+        <a href="hall-of-champions.html">Hall of Champions</a>
+      </nav>
     </div>
-  </div>
-</div>
+  </header>
 
-        <div class="footer">
-          Built as a lightweight prototype for PPCU. Update stats in <code>script.js</code> for now.
+  <main class="container">
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <h2>Hall of Champions</h2>
+          <p>
+            The permanent record of seasonal dominance, legendary runs, and defining moments.
+            This page does not reset.
+          </p>
+        </div>
+
+        <div class="hero-meta">
+          <span class="badge"><span class="dot"></span>Permanent Record</span>
+          <span class="badge"><span class="dot"></span>Legacy Archive</span>
         </div>
       </div>
-    </body>
-    </html>
+    </section>
+
+    <section class="grid">
+
+      <!-- Battle Division Champions -->
+      <article class="card span-4">
+        <h3>Battle Division Champions</h3>
+        <div class="small">
+          <strong>Season 1:</strong> TBD<br/>
+          <strong>Season 2:</strong> —<br/>
+          <strong>Season 3:</strong> —
+        </div>
+
+        <hr class="sep" />
+
+        <div class="note">
+          Winter Offensive MVPs and rivalry highlights will live here.
+        </div>
+      </article>
+
+      <!-- Emberforge Champions -->
+      <article class="card span-4">
+        <h3>Emberforge Champions</h3>
+        <div class="small">
+          <strong>Season 1:</strong> TBD<br/>
+          <strong>Season 2:</strong> —<br/>
+          <strong>Season 3:</strong> —
+        </div>
+
+        <hr class="sep" />
+
+        <div class="note">
+          Voted Champion + Narrative MVP.
+        </div>
+      </article>
+
+      <!-- Cabinet Champions -->
+      <article class="card span-4">
+        <h3>Cabinet Champions</h3>
+        <div class="small">
+          <strong>Season 1:</strong> TBD<br/>
+          <strong>Season 2:</strong> —<br/>
+          <strong>Season 3:</strong> —
+        </div>
+
+        <hr class="sep" />
+
+        <div class="note">
+          Cabinet Summit winners + career milestone moments.
+        </div>
+      </article>
+
+      <!-- Legacy Section -->
+      <article class="card">
+        <h3>All-Time Leaders (Future Module)</h3>
+
+        <div class="small">
+          Planned additions:
+        </div>
+
+        <ul class="clean-list small">
+          <li>Most total championships</li>
+          <li>Most appearances in finals</li>
+          <li>Highest career win percentage</li>
+          <li>Most narrative MVP votes</li>
+          <li>Longest winning streak</li>
+        </ul>
+
+        <div class="note" style="margin-top:12px;">
+          This page becomes powerful once Season 1 finishes.
+          Do not clutter it early. Let it grow with history.
+        </div>
+      </article>
+
+    </section>
+
+    <footer class="footer">
+      The Hall of Champions is cumulative. It is never cleared between seasons.
+    </footer>
+  </main>
+</body>
+</html>
