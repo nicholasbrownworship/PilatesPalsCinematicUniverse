@@ -6,6 +6,7 @@
   - Renders standings even if <thead>/<tbody> are missing
   - Makes leaderboard player names clickable when href is provided
   - Populates Emberforge campaign tracker (NOT a leaderboard)
+  - Populates Hall of Champions (Season 1)
   - Populates Nick Cabinet profile fields
 */
 
@@ -63,6 +64,8 @@ const PPCU = {
         spotlight: "TBD",
         mvp: "TBD",
         nextSession: "TBD",
+        // optional future fields:
+        // champion: "TBD",
       },
     },
 
@@ -72,9 +75,30 @@ const PPCU = {
         "Board game division. Mix of hard stats and table politics in a parliamentary scorecard aesthetic.",
       // Seed a couple rows; missing roster entries are added automatically.
       leaders: [
-        { player: "Nick", href: "players/nick-cabinet.html", winPct: "50%", games: 6, rating: "8.4" },
-        { player: "Josh Burchfield", href: "players/josh-burchfield-cabinet.html", winPct: "TBD", games: 0, rating: "TBD" },
+        {
+          player: "Nick",
+          href: "players/nick-cabinet.html",
+          winPct: "50%",
+          games: 6,
+          rating: "8.4",
+        },
+        {
+          player: "Josh Burchfield",
+          href: "players/josh-burchfield-cabinet.html",
+          winPct: "TBD",
+          games: 0,
+          rating: "TBD",
+        },
       ],
+    },
+  },
+
+  // Hall of Champions (manual until seasons finish; later we can auto-compute)
+  hallOfChampions: {
+    season1: {
+      battleChampion: "TBD",
+      emberforgeChampion: "TBD",
+      cabinetChampion: "TBD",
     },
   },
 
@@ -199,7 +223,7 @@ function fillHome() {
 
   const battleLeader = PPCU.divisions.battle.leaders?.[0]?.player ?? "—";
   const cabinetLeader = PPCU.divisions.cabinet.leaders?.[0]?.player ?? "—";
-  const emberArc = PPCU.divisions.emberforge.campaign.arc;
+  const emberArc = PPCU.divisions.emberforge?.campaign?.arc ?? "—";
 
   leadWrap.innerHTML = [
     { label: "Battle Division", value: battleLeader },
@@ -224,8 +248,14 @@ function fillHome() {
 function ensureTheadTbody(table) {
   let thead = table.querySelector("thead");
   let tbody = table.querySelector("tbody");
-  if (!thead) { thead = document.createElement("thead"); table.appendChild(thead); }
-  if (!tbody) { tbody = document.createElement("tbody"); table.appendChild(tbody); }
+  if (!thead) {
+    thead = document.createElement("thead");
+    table.appendChild(thead);
+  }
+  if (!tbody) {
+    tbody = document.createElement("tbody");
+    table.appendChild(tbody);
+  }
   return { thead, tbody };
 }
 
@@ -285,7 +315,7 @@ function fillDivisionPages() {
 
 /* =========================
    EMBERFORGE CAMPAIGN TRACKER (KPIs)
-   Add these IDs on emberforge.html:
+   IDs expected on emberforge.html:
      efArc, efLast, efSpotlight, efMvp, efNext
 ========================= */
 
@@ -304,6 +334,28 @@ function fillEmberforgeCampaign() {
   Object.entries(map).forEach(([id, val]) => {
     const el = document.getElementById(id);
     if (el) el.textContent = val;
+  });
+}
+
+/* =========================
+   HALL OF CHAMPIONS (Season 1)
+   IDs expected on hall-of-champions.html:
+     hocBattleS1, hocEmberS1, hocCabinetS1
+========================= */
+
+function fillHallOfChampions() {
+  const s1 = PPCU.hallOfChampions?.season1;
+  if (!s1) return;
+
+  const map = {
+    hocBattleS1: s1.battleChampion,
+    hocEmberS1: s1.emberforgeChampion,
+    hocCabinetS1: s1.cabinetChampion,
+  };
+
+  Object.entries(map).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val ?? "TBD";
   });
 }
 
@@ -349,10 +401,11 @@ function fillNickCabinetProfile() {
 
 document.addEventListener("DOMContentLoaded", () => {
   normalizeNavLinks();
-  ensureDivisionLeaders();  // build Battle + Cabinet before rendering
+  ensureDivisionLeaders(); // build Battle + Cabinet before rendering
   setActiveNav();
   fillHome();
   fillDivisionPages();
   fillEmberforgeCampaign();
+  fillHallOfChampions();
   fillNickCabinetProfile();
 });
