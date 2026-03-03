@@ -2,9 +2,10 @@
   PPCU Site JS (single-file prototype)
   - Fixes nav links from /players/
   - Highlights active nav item reliably
-  - Auto-fills leaderboards from rosters (no more "TBD" everywhere)
+  - Auto-fills leaderboards from rosters (Battle + Cabinet only)
   - Renders standings even if <thead>/<tbody> are missing
   - Makes leaderboard player names clickable when href is provided
+  - Populates Emberforge campaign tracker (NOT a leaderboard)
   - Populates Nick Cabinet profile fields
 */
 
@@ -50,17 +51,26 @@ const PPCU = {
         "Miniatures league (40k, Legion, MESBG, Armada, Shatterpoint). Season-first standings with career snapshots.",
       leaders: null, // auto-built from roster
     },
+
+    // Emberforge is NOT a leaderboard—it's a campaign tracker.
     emberforge: {
       name: "Emberforge",
       blurb:
-        "TTRPG division. Champion is voted (players now, community later). Track narrative impact, spotlight, and legacy.",
-      leaders: null, // auto-built from roster
+        "TTRPG division. Champion is voted (players now; community later). Track narrative impact, spotlight episodes, and legacy.",
+      campaign: {
+        arc: "Arc 1: TBD",
+        lastSession: "TBD",
+        spotlight: "TBD",
+        mvp: "TBD",
+        nextSession: "TBD",
+      },
     },
+
     cabinet: {
       name: "The Cabinet",
       blurb:
         "Board game division. Mix of hard stats and table politics in a parliamentary scorecard aesthetic.",
-      // You can seed a couple stats; we’ll add missing roster entries automatically.
+      // Seed a couple rows; missing roster entries are added automatically.
       leaders: [
         { player: "Nick", href: "players/nick-cabinet.html", winPct: "50%", games: 6, rating: "8.4" },
         { player: "Josh Burchfield", href: "players/josh-burchfield-cabinet.html", winPct: "TBD", games: 0, rating: "TBD" },
@@ -109,20 +119,17 @@ function isInPlayersFolder() {
 }
 
 function normalizeNavLinks() {
-  // If we are in /players/, make top nav point back up one directory.
   if (!isInPlayersFolder()) return;
 
   document.querySelectorAll(".nav a").forEach((a) => {
     const href = a.getAttribute("href") || "";
-    // Skip absolute/anchor/mailto/etc.
     if (
       href.startsWith("http") ||
       href.startsWith("#") ||
       href.startsWith("mailto:") ||
       href.startsWith("../")
-    ) {
-      return;
-    }
+    ) return;
+
     a.setAttribute("href", "../" + href);
   });
 }
@@ -132,13 +139,14 @@ function setActiveNav() {
 
   document.querySelectorAll(".nav a").forEach((a) => {
     const href = (a.getAttribute("href") || "").toLowerCase();
-    const file = href.split("/").pop(); // handles ../index.html
+    const file = href.split("/").pop();
     if (file === current) a.classList.add("active");
   });
 }
 
 /* =========================
    AUTO-FILL LEADERBOARDS
+   (Battle + Cabinet only)
 ========================= */
 
 function ensureDivisionLeaders() {
@@ -152,17 +160,6 @@ function ensureDivisionLeaders() {
       w: 0,
       l: 0,
       mvp: 0,
-    }));
-  }
-
-  // Emberforge: build from roster if leaders not present
-  if (!Array.isArray(PPCU.divisions.emberforge.leaders) || PPCU.divisions.emberforge.leaders.length === 0) {
-    PPCU.divisions.emberforge.leaders = (PPCU.rosters.emberforge || []).map((p, i) => ({
-      rank: i + 1,
-      player: p.name,
-      href: p.href,
-      impact: 0,
-      votes: 0,
     }));
   }
 
@@ -180,7 +177,6 @@ function ensureDivisionLeaders() {
       rating: "TBD",
     }));
 
-  // Re-rank
   PPCU.divisions.cabinet.leaders = [...seeded, ...added].map((row, i) => ({
     rank: i + 1,
     ...row,
@@ -188,7 +184,7 @@ function ensureDivisionLeaders() {
 }
 
 /* =========================
-   HOME
+   HOME SNAPSHOT
 ========================= */
 
 function fillHome() {
@@ -201,15 +197,14 @@ function fillHome() {
   const leadWrap = document.getElementById("homeLeaders");
   if (!leadWrap) return;
 
-  // If leaders exist, show the top-ranked player; else fallback
   const battleLeader = PPCU.divisions.battle.leaders?.[0]?.player ?? "—";
-  const emberLeader = PPCU.divisions.emberforge.leaders?.[0]?.player ?? "—";
-  const cabLeader = PPCU.divisions.cabinet.leaders?.[0]?.player ?? "—";
+  const cabinetLeader = PPCU.divisions.cabinet.leaders?.[0]?.player ?? "—";
+  const emberArc = PPCU.divisions.emberforge.campaign.arc;
 
   leadWrap.innerHTML = [
     { label: "Battle Division", value: battleLeader },
-    { label: "Emberforge", value: emberLeader },
-    { label: "The Cabinet", value: cabLeader },
+    { label: "Emberforge", value: emberArc },
+    { label: "The Cabinet", value: cabinetLeader },
   ]
     .map(
       (b) => `
@@ -229,20 +224,9 @@ function fillHome() {
 function ensureTheadTbody(table) {
   let thead = table.querySelector("thead");
   let tbody = table.querySelector("tbody");
-
-  if (!thead) {
-    thead = document.createElement("thead");
-    table.appendChild(thead);
-  }
-  if (!tbody) {
-    tbody = document.createElement("tbody");
-    table.appendChild(tbody);
-  }
+  if (!thead) { thead = document.createElement("thead"); table.appendChild(thead); }
+  if (!tbody) { tbody = document.createElement("tbody"); table.appendChild(tbody); }
   return { thead, tbody };
-}
-
-function cellValue(row, key) {
-  return row[key] ?? "";
 }
 
 function fillTable(tableId, rows, columns) {
@@ -264,13 +248,13 @@ function fillTable(tableId, rows, columns) {
       return `<tr class="${isTop ? "is-top" : ""}">
         ${columns
           .map((c) => {
+            const val = r[c.key] ?? "";
             if (c.key === "player") {
-              const name = cellValue(r, "player");
               const href = r.href;
-              if (href) return `<td><a href="${href}">${name}</a></td>`;
-              return `<td>${name}</td>`;
+              if (href) return `<td><a href="${href}">${val}</a></td>`;
+              return `<td>${val}</td>`;
             }
-            return `<td>${cellValue(r, c.key)}</td>`;
+            return `<td>${val}</td>`;
           })
           .join("")}
       </tr>`;
@@ -279,6 +263,7 @@ function fillTable(tableId, rows, columns) {
 }
 
 function fillDivisionPages() {
+  // Battle leaderboard
   fillTable("battleStandings", PPCU.divisions.battle.leaders, [
     { key: "rank", label: "#" },
     { key: "player", label: "Player" },
@@ -288,13 +273,7 @@ function fillDivisionPages() {
     { key: "mvp", label: "MVP" },
   ]);
 
-  fillTable("emberStandings", PPCU.divisions.emberforge.leaders, [
-    { key: "rank", label: "#" },
-    { key: "player", label: "Player" },
-    { key: "impact", label: "Impact" },
-    { key: "votes", label: "Votes" },
-  ]);
-
+  // Cabinet leaderboard
   fillTable("cabinetStandings", PPCU.divisions.cabinet.leaders, [
     { key: "rank", label: "#" },
     { key: "player", label: "Player" },
@@ -302,6 +281,30 @@ function fillDivisionPages() {
     { key: "games", label: "Games" },
     { key: "rating", label: "Influence" },
   ]);
+}
+
+/* =========================
+   EMBERFORGE CAMPAIGN TRACKER (KPIs)
+   Add these IDs on emberforge.html:
+     efArc, efLast, efSpotlight, efMvp, efNext
+========================= */
+
+function fillEmberforgeCampaign() {
+  const c = PPCU.divisions.emberforge?.campaign;
+  if (!c) return;
+
+  const map = {
+    efArc: c.arc,
+    efLast: c.lastSession,
+    efSpotlight: c.spotlight,
+    efMvp: c.mvp,
+    efNext: c.nextSession,
+  };
+
+  Object.entries(map).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  });
 }
 
 /* =========================
@@ -346,9 +349,10 @@ function fillNickCabinetProfile() {
 
 document.addEventListener("DOMContentLoaded", () => {
   normalizeNavLinks();
-  ensureDivisionLeaders();   // IMPORTANT: build leaderboards before rendering
+  ensureDivisionLeaders();  // build Battle + Cabinet before rendering
   setActiveNav();
   fillHome();
   fillDivisionPages();
+  fillEmberforgeCampaign();
   fillNickCabinetProfile();
 });
