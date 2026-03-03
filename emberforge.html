@@ -1,76 +1,137 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>PPCU – Emberforge</title>
-      <link rel="stylesheet" href="styles.css" />
-      <script defer src="script.js"></script>
-    </head>
-    <body class="div-emberforge">
-      <div class="topbar">
-        <div class="brand">
-          <div class="brand-mark" aria-hidden="true"></div>
-          <div>
-            <h1>PPCU</h1>
-            <div class="tag">Pilates Pals Cinematic Universe</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PPCU – Emberforge</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+
+<body class="div-emberforge">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <h1>PPCU</h1>
+          <div class="tag">Pilates Pals Cinematic Universe</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="battle-division.html">Battle Division</a>
+        <a href="emberforge.html">Emberforge</a>
+        <a href="cabinet.html">The Cabinet</a>
+        <a href="hall-of-champions.html">Hall of Champions</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" aria-label="Emberforge overview">
+      <div class="hero-top">
+        <div>
+          <h2>Emberforge</h2>
+          <p>
+            TTRPG division. Champion is voted (players now; community later).
+            Track narrative impact, spotlight episodes, and legacy moments.
+          </p>
+        </div>
+
+        <div class="hero-meta">
+          <span class="badge"><span class="dot"></span>Season Tracker</span>
+          <span class="badge"><span class="dot"></span>Emberforge Chronicle</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Emberforge dashboard">
+      <article class="card span-8">
+        <h3>Season Tracker</h3>
+
+        <div class="small">
+          This isn’t just “wins and losses.” It’s impact, spotlight, and how the table remembers you.
+          (This table auto-populates from <code>script.js</code> for now.)
+        </div>
+
+        <table class="table" id="emberStandings">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+
+        <div class="note" style="margin-top:12px;">
+          Future upgrade: add an Episode Index page and a simple vote form so “Champion” is actually voted each arc.
+        </div>
+      </article>
+
+      <aside class="card span-4">
+        <h3>Holiday Special</h3>
+        <div class="badge"><span class="dot"></span>Emberforge Chronicle</div>
+
+        <div class="small" style="margin-top:10px;">
+          Standalone one-shot / dramatic special episode. Great for origin stories, flashbacks,
+          alternate timelines, or “what really happened” retellings.
+        </div>
+
+        <hr class="sep" />
+
+        <div class="small">
+          Chronicle prompts:
+          <ul class="clean-list">
+            <li>The party meets before session 1 (prologue)</li>
+            <li>A villain POV episode</li>
+            <li>“Where were you when…” historical flashback</li>
+            <li>An epilogue that sets up next season</li>
+          </ul>
+        </div>
+      </aside>
+
+      <article class="card">
+        <h3>Characters & Recaps</h3>
+        <div class="small">
+          Planned modules: character sheets, episode list, recap archive, and narrative awards.
+        </div>
+
+        <hr class="sep" />
+
+        <div class="grid" style="margin-top:0;">
+          <div class="card span-6" style="margin-top:0;">
+            <h3 style="margin-bottom:8px;">Roster</h3>
+            <ul class="clean-list">
+              <li><a href="players/nick-emberforge.html">Nick</a></li>
+              <li><a href="players/josh-burchfield-emberforge.html">Josh Burchfield</a></li>
+              <li><a href="players/josh-brown-emberforge.html">Josh Brown</a></li>
+              <li><a href="players/katelyn-brown-emberforge.html">Katelyn Brown</a></li>
+              <li><a href="players/spencer-hinrichs-emberforge.html">Spencer Hinrichs</a></li>
+              <li><a href="players/carson-hinrichs-emberforge.html">Carson Hinrichs</a></li>
+              <li><a href="players/corey-jackson-emberforge.html">Corey Jackson</a></li>
+            </ul>
+          </div>
+
+          <div class="card span-6" style="margin-top:0;">
+            <h3 style="margin-bottom:8px;">Awards we can track</h3>
+            <div class="small">
+              <ul class="clean-list">
+                <li>Spotlight Episode (best scene)</li>
+                <li>Table MVP (vote)</li>
+                <li>Chaos Gremlin Moment</li>
+                <li>Most Consequential Choice</li>
+              </ul>
+            </div>
+
+            <div class="note" style="margin-top:12px;">
+              When you paste a player page, I’ll convert it into a real “character dossier” layout and make sure the nav works inside <code>/players/</code>.
+            </div>
           </div>
         </div>
-        <div class="nav">
-          <a href="index.html">Home</a>
-          <a href="battle-division.html">Battle Division</a>
-          <a href="emberforge.html">Emberforge</a>
-          <a href="cabinet.html">The Cabinet</a>
-          <a href="hall-of-champions.html">Hall of Champions</a>
-        </div>
-      </div>
+      </article>
+    </section>
 
-      <div class="container">
-        <section class="hero">
-          <h2>Emberforge</h2>
-          <p>TTRPG division. Champion is voted (players now; community later). Track narrative impact, spotlight episodes, and legacy.</p>
-        </section>
-
-        <div class="grid">
-  <div class="card span-8">
-    <h3>Season Tracker</h3>
-    <table class="table" id="emberStandings">
-      <thead></thead>
-      <tbody></tbody>
-    </table>
-    <div class="small">
-      Placeholder tracker. When you’re ready, we can add a vote page + episode recap index.
-    </div>
-  </div>
-
-  <div class="card span-4">
-    <h3>Holiday Special</h3>
-    <div class="badge"><span class="dot"></span>Emberforge Chronicle</div>
-    <p class="small" style="margin-top:10px;">
-      Standalone one-shot / dramatic special episode. Great for origin stories and flashbacks.
-    </p>
-  </div>
-
-  <div class="card">
-    <h3>Characters & Recaps</h3>
-    <p class="small">
-      Planned modules: character sheets, episode list, recap archive, and narrative awards.
-    </p>
-        <div class="small"><ul>
-<li><a href="players/nick-emberforge.html">Nick</a></li>
-<li><a href="players/josh-burchfield-emberforge.html">Josh Burchfield</a></li>
-<li><a href="players/josh-brown-emberforge.html">Josh Brown</a></li>
-<li><a href="players/katelyn-brown-emberforge.html">Katelyn Brown</a></li>
-<li><a href="players/spencer-hinrichs-emberforge.html">Spencer Hinrichs</a></li>
-<li><a href="players/carson-hinrichs-emberforge.html">Carson Hinrichs</a></li>
-<li><a href="players/corey-jackson-emberforge.html">Corey Jackson</a></li>
-</ul></div>
-  </div>
-</div>
-
-        <div class="footer">
-          Built as a lightweight prototype for PPCU. Update stats in <code>script.js</code> for now.
-        </div>
-      </div>
-    </body>
-    </html>
+    <footer class="footer">
+      Built as a lightweight prototype for PPCU. Update stats in <code>script.js</code> for now.
+    </footer>
+  </main>
+</body>
+</html>
