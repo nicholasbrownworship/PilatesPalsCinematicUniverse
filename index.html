@@ -1,0 +1,82 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>PPCU – Home</title>
+      <link rel="stylesheet" href="styles.css" />
+      <script defer src="script.js"></script>
+    </head>
+    <body class="div-home">
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div>
+            <h1>PPCU</h1>
+            <div class="tag">Pilates Pals Cinematic Universe</div>
+          </div>
+        </div>
+        <div class="nav">
+          <a href="index.html">Home</a>
+          <a href="battle-division.html">Battle Division</a>
+          <a href="emberforge.html">Emberforge</a>
+          <a href="cabinet.html">The Cabinet</a>
+          <a href="hall-of-champions.html">Hall of Champions</a>
+        </div>
+      </div>
+
+      <div class="container">
+        <section class="hero">
+          <h2>Welcome to the PPCU</h2>
+          <p>A hybrid sports-league + cinematic universe for tabletop games. Serious structure. Fun execution.</p>
+        </section>
+
+        <div class="grid">
+  <div class="card span-8">
+    <h3>Current Season</h3>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="label">Season</div>
+        <div class="value" id="seasonLabel">Season 1</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Updates</div>
+        <div class="value" id="updatedLabel">Manual</div>
+      </div>
+    </div>
+    <hr class="sep" />
+    <div class="small">
+      PPCU is organized into three institutions:
+      <span class="badge"><span class="dot"></span>Battle Division</span>
+      <span class="badge"><span class="dot"></span>Emberforge</span>
+      <span class="badge"><span class="dot"></span>The Cabinet</span>
+    </div>
+  </div>
+
+  <div class="card span-4">
+    <h3>Quick Links</h3>
+    <div class="small">
+      <ul>
+        <li><a href="battle-division.html">Battle Division standings</a></li>
+        <li><a href="emberforge.html">Emberforge campaign hub</a></li>
+        <li><a href="cabinet.html">The Cabinet leaderboard</a></li>
+        <li><a href="hall-of-champions.html">Hall of Champions</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Current Division Leaders</h3>
+    <div class="kpi-row" id="homeLeaders"></div>
+    <div class="note" style="margin-top:12px;">
+      Holiday specials idea (annual): Winter Offensive (Battle), Emberforge Chronicle (TTRPG), Cabinet Summit (Board Games).
+    </div>
+  </div>
+</div>
+
+        <div class="footer">
+          Built as a lightweight prototype for PPCU. Update stats in <code>script.js</code> for now.
+        </div>
+      </div>
+    </body>
+    </html>
