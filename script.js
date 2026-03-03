@@ -1,8 +1,8 @@
 /*
   PPCU Site JS (lightweight)
-  - Highlights active nav item
-  - Populates sample standings + player cards from a single data object
-  - Designed to be replaced later with JSON files / automation
+  - Fixes nav links from /players/
+  - Highlights active nav item reliably
+  - Renders standings even if <thead>/<tbody> are missing
 */
 
 const PPCU = {
@@ -63,48 +63,92 @@ const PPCU = {
   }
 };
 
+function isInPlayersFolder(){
+  return location.pathname.toLowerCase().includes("/players/");
+}
+
+function normalizeNavLinks(){
+  // If we are in /players/, make top nav point back up one directory.
+  if(!isInPlayersFolder()) return;
+
+  document.querySelectorAll(".nav a").forEach(a => {
+    const href = a.getAttribute("href") || "";
+    // Skip absolute/anchor/mailto/etc.
+    if (
+      href.startsWith("http") ||
+      href.startsWith("#") ||
+      href.startsWith("mailto:") ||
+      href.startsWith("../")
+    ) return;
+
+    a.setAttribute("href", "../" + href);
+  });
+}
+
 function setActiveNav(){
-  const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  document.querySelectorAll('.nav a').forEach(a => {
-    const href = (a.getAttribute('href') || '').toLowerCase();
-    if(href === path) a.classList.add('active');
+  const current = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+
+  document.querySelectorAll(".nav a").forEach(a => {
+    const href = (a.getAttribute("href") || "").toLowerCase();
+    const file = href.split("/").pop(); // handles ../index.html
+    if(file === current) a.classList.add("active");
   });
 }
 
 function fillHome(){
-  const elSeason = document.getElementById('seasonLabel');
+  const elSeason = document.getElementById("seasonLabel");
   if(elSeason) elSeason.textContent = PPCU.season;
 
-  const elUpdated = document.getElementById('updatedLabel');
+  const elUpdated = document.getElementById("updatedLabel");
   if(elUpdated) elUpdated.textContent = PPCU.updated;
 
-  const leadWrap = document.getElementById('homeLeaders');
+  const leadWrap = document.getElementById("homeLeaders");
   if(!leadWrap) return;
 
   const blocks = [
-    { accent:"Battle Division", line:"Leader: " + (PPCU.divisions.battle.leaders[0]?.player ?? "TBD") },
-    { accent:"Emberforge", line:"Leader: " + (PPCU.divisions.emberforge.leaders[0]?.player ?? "TBD") },
-    { accent:"The Cabinet", line:"Leader: " + (PPCU.divisions.cabinet.leaders[0]?.player ?? "TBD") },
+    { label:"Battle Division", value: PPCU.divisions.battle.leaders[0]?.player ?? "TBD" },
+    { label:"Emberforge", value: PPCU.divisions.emberforge.leaders[0]?.player ?? "TBD" },
+    { label:"The Cabinet", value: PPCU.divisions.cabinet.leaders[0]?.player ?? "TBD" },
   ];
 
   leadWrap.innerHTML = blocks.map(b => `
     <div class="kpi">
-      <div class="label">${b.accent}</div>
-      <div class="value">${b.line}</div>
+      <div class="label">${b.label}</div>
+      <div class="value">${b.value}</div>
     </div>
-  `).join('');
+  `).join("");
+}
+
+function ensureTheadTbody(table){
+  let thead = table.querySelector("thead");
+  let tbody = table.querySelector("tbody");
+
+  // If someone forgot to include thead/tbody in HTML, create them.
+  if(!thead){
+    thead = document.createElement("thead");
+    table.appendChild(thead);
+  }
+  if(!tbody){
+    tbody = document.createElement("tbody");
+    table.appendChild(tbody);
+  }
+  return { thead, tbody };
 }
 
 function fillTable(tableId, rows, columns){
   const table = document.getElementById(tableId);
   if(!table) return;
 
-  const thead = table.querySelector('thead');
-  const tbody = table.querySelector('tbody');
-  if(!thead || !tbody) return;
+  const { thead, tbody } = ensureTheadTbody(table);
 
-  thead.innerHTML = "<tr>" + columns.map(c => `<th>${c.label}</th>`).join('') + "</tr>";
-  tbody.innerHTML = rows.map(r => "<tr>" + columns.map(c => `<td>${r[c.key] ?? ""}</td>`).join('') + "</tr>").join('');
+  thead.innerHTML = "<tr>" + columns.map(c => `<th>${c.label}</th>`).join("") + "</tr>";
+
+  tbody.innerHTML = rows.map((r, i) => {
+    const isTop = (r.rank === 1) || (i === 0);
+    return `<tr class="${isTop ? "is-top" : ""}">
+      ${columns.map(c => `<td>${r[c.key] ?? ""}</td>`).join("")}
+    </tr>`;
+  }).join("");
 }
 
 function fillDivisionPages(){
@@ -166,6 +210,7 @@ function fillNickCabinetProfile(){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  normalizeNavLinks();
   setActiveNav();
   fillHome();
   fillDivisionPages();
